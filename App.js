@@ -3,6 +3,9 @@ import { StyleSheet, Button, Text, View } from 'react-native';
 import { createStackNavigator, createAppContainer } from "react-navigation";
 
 class HomeScreen extends React.Component {
+  static navigationOptions = {
+    title: 'Home',
+  };
   render() {
     return (
        <View style={styles.container}>
@@ -22,6 +25,9 @@ class HomeScreen extends React.Component {
 }
 
 class DetailsScreen extends React.Component {
+  static navigationOptions = {
+    title: 'Details',
+  };
   render() {
     /* 2. Get the param, provide a fallback value if not available */
     const { navigation } = this.props;
