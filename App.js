@@ -16,7 +16,7 @@ class HomeScreen extends React.Component {
             /* 1. Navigate to the Details route with params */
             this.props.navigation.navigate('Details', {
               itemId: 86,
-              otherParam: 'anything you want here',
+              otherParam: 'Details',
             });
           }}/>
       </View>
@@ -25,8 +25,10 @@ class HomeScreen extends React.Component {
 }
 
 class DetailsScreen extends React.Component {
-  static navigationOptions = {
-    title: 'Details',
+  static navigationOptions = ({ navigation }) => {
+    return {
+      title: navigation.getParam('otherParam', 'Details'),
+    };
   };
   render() {
     /* 2. Get the param, provide a fallback value if not available */
@@ -51,6 +53,9 @@ class DetailsScreen extends React.Component {
         <Button
           title="Go back"
           onPress={() => this.props.navigation.goBack()}/>
+        <Button
+          title="Update the title"
+          onPress={() => this.props.navigation.setParams({otherParam: 'Details Updated!'})}/>
       </View>
     );
   }
@@ -62,7 +67,17 @@ const AppNavigator = createStackNavigator(
     Details: DetailsScreen
   },
   {
-    initialRouteName: "Home"
+    initialRouteName: "Home",
+    /* The header config from HomeScreen is now here */
+    defaultNavigationOptions: {
+      headerStyle: {
+        backgroundColor: '#f4511e',
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      },
+    },
   }
 );
 
